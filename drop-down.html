@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            margin:0;
+            padding:0;
+        }
+
+        div {
+            float: left;
+            width: 50px;
+            height: 50px;
+            background: green;
+            /*position: relative;*/
+            font: 20px/50px Timers;
+            color: #ffffff;
+            text-align: center;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body id="wrap">
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div>
+
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="miaov.js"></script>
+    <script>
+        (function(){
+
+          $('div').each(function(i,el){
+                $(this).html(i);
+//               $(el).css('left',$(el).offset().left);
+//               $(el).css('top',$(el).offset().top);
+              $(el).css({
+                  left:$(el).offset().left,
+                  top:$(el).offset().top
+              });
+            $('div').click(function(){
+                $(this).animate({
+                    top:300
+                },500);
+                $(el).css({
+                    position:'absolute',
+                    margin:0
+                });
+                prev($(this).get(0));
+                next($(this).get(0));
+            });
+          });
+
+            function prev(ev) {
+                var $prev = $(ev).prev();
+                if($prev){
+                    setTimeout(function(){
+                        $prev.animate({
+                            top:300
+                        },500);
+                        prev($prev);
+                    },100)
+                }
+            }
+
+            function next(ev) {
+                var $next = $(ev).next();
+                if ($next) {
+                    setTimeout(function () {
+                        $next.animate({
+                            top: 300
+                        },500);
+                        next($next);
+                    },100)
+                }
+            }
+
+
+
+        })()
+
+    </script>
+</body>
+</html>
